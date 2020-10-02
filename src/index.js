@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 import { authConfig } from './authConfig';
 
 ReactDOM.render(
-    <React.StrictMode>
-        {console.log('config ->', authConfig)}
+    <Auth0Provider domain={authConfig.domain} clientId={authConfig.clientId} audience={authConfig.audience} redirectUri={window.location.origin}>
         <App />
-    </React.StrictMode>,
+    </Auth0Provider>,
     document.getElementById('root')
 );
 
