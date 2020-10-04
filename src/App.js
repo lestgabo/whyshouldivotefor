@@ -11,6 +11,10 @@ import Home from './views/Home';
 // styles
 import './App.css';
 
+// fontawesome
+import initFontAwesome from './utils/initFontAwesome';
+initFontAwesome();
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
