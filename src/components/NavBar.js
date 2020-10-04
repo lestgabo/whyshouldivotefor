@@ -22,6 +22,19 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
+    userInfo: {
+        display: 'flex',
+        justifyContent: 'space-around',
+    },
+    userPicture: {
+        borderRadius: '50%',
+    },
+    userName: {
+        padding: '10px',
+    },
+    iconButton: {
+        maxHeight: '64px',
+    },
 }));
 
 const StyledMenu = withStyles({
@@ -47,7 +60,13 @@ const StyledMenu = withStyles({
 const StyledMenuItem = withStyles((theme) => ({
     root: {
         '&:focus': {
-            backgroundColor: theme.palette.primary.main,
+            backgroundColor: theme.palette.secondary.main,
+            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+                color: theme.palette.common.white,
+            },
+        },
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.main,
             '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
                 color: theme.palette.common.white,
             },
@@ -82,10 +101,11 @@ const NavBar = () => {
                         <FontAwesomeIcon icon="bars" />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        Why should I vote for x?
+                        Why Should I Vote For
                     </Typography>
 
-                    {isAuthenticated && (
+                    {/* if not logged in -> user icon  */}
+                    {!isAuthenticated && (
                         <IconButton
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
@@ -96,20 +116,72 @@ const NavBar = () => {
                             <FontAwesomeIcon icon="user" />
                         </IconButton>
                     )}
-                    <StyledMenu id="user menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
-                        <StyledMenuItem onClick={handleMenuClose}>
-                            <ListItemIcon>
-                                <FontAwesomeIcon icon={['fab', 'linkedin']} />
-                            </ListItemIcon>
-                            <ListItemText primary="Profile" />
-                        </StyledMenuItem>
-                        <StyledMenuItem onClick={handleMenuClose}>
-                            <ListItemIcon>
-                                <FontAwesomeIcon icon="power-off" />
-                            </ListItemIcon>
-                            <ListItemText primary="Logout" />
-                        </StyledMenuItem>
-                    </StyledMenu>
+                    {/* if logged in -> linkedin profile picture  */}
+                    {isAuthenticated && (
+                        <IconButton
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenuClick}
+                            color="inherit"
+                            className={classes.iconButton}
+                        >
+                            <div className={classes.userInfo}>
+                                <img src={user.picture} alt="Profile" className={classes.userPicture} width="50" />
+                                <div className={classes.userName}>
+                                    <Typography variant="h6">{user.name}</Typography>
+                                </div>
+                            </div>
+                        </IconButton>
+                    )}
+                    {/* logged in */}
+                    {isAuthenticated && (
+                        <StyledMenu
+                            id="user menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleMenuClose}
+                            autoFocus={false}
+                        >
+                            <StyledMenuItem onClick={handleMenuClose}>
+                                <ListItemIcon>
+                                    <FontAwesomeIcon icon={['fab', 'linkedin']} />
+                                </ListItemIcon>
+                                <ListItemText primary="Profile" />
+                            </StyledMenuItem>
+                            <StyledMenuItem onClick={() => logoutWithRedirect()}>
+                                <ListItemIcon>
+                                    <FontAwesomeIcon icon="power-off" />
+                                </ListItemIcon>
+                                <ListItemText primary="Log out" />
+                            </StyledMenuItem>
+                        </StyledMenu>
+                    )}
+                    {/* logged out */}
+                    {!isAuthenticated && (
+                        <StyledMenu
+                            id="user menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleMenuClose}
+                            autoFocus={false}
+                        >
+                            <StyledMenuItem
+                                onClick={() => {
+                                    loginWithRedirect();
+                                    handleMenuClose();
+                                    return null;
+                                }}
+                            >
+                                <ListItemIcon>
+                                    <FontAwesomeIcon icon={['fab', 'linkedin']} />
+                                </ListItemIcon>
+                                <ListItemText primary="Log in" />
+                            </StyledMenuItem>
+                        </StyledMenu>
+                    )}
                 </Toolbar>
             </AppBar>
         </div>
