@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { db } from '../utils/firebaseConfig';
 
+import AddBook from '../components/AddBook';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: '#FFFFFF',
+        height: '90vh',
     },
 }));
 
@@ -30,6 +33,20 @@ const Home = () => {
         db.collection('books').doc(id).delete();
     };
 
+    /** delete book code
+                      
+         <div
+            onClick={() => deleteBook(book.id)}
+            className="book-delete"
+            style={{ cursor: 'pointer' }} // add
+        >
+            <i className="material-icons">delete</i>
+        </div>
+
+        * add book code
+         <AddBook /> 
+     */
+
     return (
         <div className={classes.root}>
             <div>hello from America</div>
@@ -43,13 +60,6 @@ const Home = () => {
                                     <div className="book-details">
                                         <div className="book-title">{book.title}</div>
                                         <div className="book-author">{book.author}</div>
-                                    </div>
-                                    <div
-                                        onClick={() => deleteBook(book.id)}
-                                        className="book-delete"
-                                        style={{ cursor: 'pointer' }} // add
-                                    >
-                                        <i className="material-icons">delete</i>
                                     </div>
                                 </div>
                             </li>

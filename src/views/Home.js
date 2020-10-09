@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import Container from '@material-ui/core/Container';
 
 import America from '../components/America';
-import AddBook from '../components/AddBook';
 
 const Home = () => {
     return (
         <>
-            <America />
-            <AddBook />
+            <Container maxWidth="sm">
+                <America />
+            </Container>
         </>
     );
 };

@@ -20,13 +20,14 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100%',
+        height: 'calc(100vh - 64px)',
         width: '100%',
         padding: '0px',
         margin: '0px',
 
-        minHeight: '100vh',
         flexDirection: 'column',
+
+        backgroundColor: theme.palette.secondary.main,
     },
 }));
 
