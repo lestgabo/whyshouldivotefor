@@ -34,10 +34,10 @@
     "scripts": {
         "start": "run-p start:**",
         "start:frontend": "react-scripts start",
-        "start:server-local": "nodemon backend/server-local",
+        "start:server-local": "nodemon functions/server-local",
         "build": "run-p build:**",
         "build:frontend": "react-scripts build",
-        "build:lambda": "netlify-lambda build backend",
+        "build:lambda": "netlify-lambda build functions",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
