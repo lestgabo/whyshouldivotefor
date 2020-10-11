@@ -35,7 +35,7 @@
         "start": "run-p start:**",
         "start:frontend": "react-scripts start",
         "start:lambda": "netlify-lambda serve functions",
-        "start:server-local": "nodemon functions/server-local",
+        "start:server-local": "nodemon server-local",
         "build": "run-p build:**",
         "build:frontend": "react-scripts build",
         "build:lambda": "netlify-lambda build functions",

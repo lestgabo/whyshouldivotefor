@@ -60,3 +60,14 @@ sketch
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
+
+
+# netlify
+src/bundle.js
+.netlify
+node_modules
+dist
+.cache
+.DS_Store
+.env
+lambda
