@@ -6,16 +6,15 @@ const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const firebaseAdmin = require('firebase-admin');
 
-const authConfig = require('./src/auth_config.json');
 const config = require('./config');
 
 const app = express();
 
 const port = process.env.API_PORT || 3001;
 const appPort = process.env.SERVER_PORT || 3000;
-const appOrigin = authConfig.appOrigin || `http://localhost:${appPort}`;
+const appOrigin = config.AUTH0_APPORIGIN || `http://localhost:${appPort}`;
 
-if (!authConfig.domain || !authConfig.audience) {
+if (!config.AUTH0_DOMAIN || !config.AUTH0_AUDIENCE) {
     throw new Error('Please make sure that auth_config.json is in place and populated');
 }
 
@@ -28,11 +27,11 @@ const checkJwt = jwt({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`,
+        jwksUri: `https://${config.AUTH0_DOMAIN}/.well-known/jwks.json`,
     }),
 
-    audience: authConfig.audience,
-    issuer: `https://${authConfig.domain}/`,
+    audience: config.AUTH0_AUDIENCE,
+    issuer: `https://${config.AUTH0_DOMAIN}/`,
     algorithms: ['RS256'],
 });
 
@@ -42,8 +41,7 @@ app.get('/api/external', checkJwt, (req, res) => {
     });
 });
 
-// initialize firebase admin
-const serviceAccount = require(config.FIREBASE_KEY);
+const serviceAccount = config.FIREBASE_KEY;
 firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(serviceAccount),
     databaseURL: config.FIREBASE_DB,
@@ -51,7 +49,6 @@ firebaseAdmin.initializeApp({
 
 app.get('/auth/firebase', checkJwt, (req, res) => {
     const uid = req.user.sub;
-
     firebaseAdmin
         .auth()
         .createCustomToken(uid)
