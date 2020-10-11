@@ -39,7 +39,7 @@ const checkJwt = jwt({
     algorithms: ['RS256'],
 });
 
-app.get('/.netlify/functions/api/external', checkJwt, (req, res) => {
+app.get('/.netlify/functions/server/api/external', checkJwt, (req, res) => {
     res.send({
         msg: 'Your access token was successfully validated!',
     });
@@ -51,7 +51,7 @@ firebaseAdmin.initializeApp({
     databaseURL: config.FIREBASE_DB,
 });
 
-app.get('/.netlify/functions/auth/firebase', checkJwt, (req, res) => {
+app.get('/.netlify/functions/server/auth/firebase', checkJwt, (req, res) => {
     const uid = req.user.sub;
     firebaseAdmin
         .auth()
