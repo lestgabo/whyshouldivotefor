@@ -35,7 +35,8 @@
         "start": "run-p start:**",
         "start:frontend": "react-scripts start",
         "start:server-local": "nodemon backend/server-local",
-        "build": "react-scripts build",
+        "build": "run-p build:**",
+        "build:frontend": "react-scripts build",
         "build:lambda": "netlify-lambda build backend",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
