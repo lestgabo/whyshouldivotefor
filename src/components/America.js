@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { db } from '../utils/firebaseConfig';
 
 import AddBook from '../components/AddBook';
+import ApiCheck from './ApiCheck';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,6 +51,7 @@ const Home = () => {
     return (
         <div className={classes.root}>
             <div>hello from America</div>
+            <ApiCheck />
             <div className="section section-books">
                 <div className="container">
                     <h6>Books</h6>
