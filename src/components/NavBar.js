@@ -30,7 +30,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '50%',
     },
     userName: {
-        padding: '10px',
+        '&:hover': {
+            backgroundColor: 'none',
+        },
     },
     iconButton: {
         maxHeight: '64px',
@@ -128,9 +130,6 @@ const NavBar = () => {
                         >
                             <div className={classes.userInfo}>
                                 <img src={user.picture} alt="Profile" className={classes.userPicture} width="50" />
-                                <div className={classes.userName}>
-                                    <Typography variant="h6">{user.name}</Typography>
-                                </div>
                             </div>
                         </IconButton>
                     )}
@@ -144,6 +143,11 @@ const NavBar = () => {
                             onClose={handleMenuClose}
                             autoFocus={false}
                         >
+                            <MenuItem onClick={handleMenuClose}>
+                                <div className={classes.userName}>
+                                    <Typography variant="h6">{user.name}</Typography>
+                                </div>
+                            </MenuItem>
                             <StyledMenuItem onClick={handleMenuClose}>
                                 <ListItemIcon>
                                     <FontAwesomeIcon icon={['fab', 'linkedin']} />
