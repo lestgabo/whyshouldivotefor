@@ -90,7 +90,7 @@ const Home = () => {
         try {
             const token = await getAccessTokenSilently();
 
-            const response = await fetch(`${apiOrigin}/auth/firebase`, {
+            const response = await fetch(`${apiOrigin}/api/auth/firebase`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

@@ -51,7 +51,7 @@ firebaseAdmin.initializeApp({
     databaseURL: config.FIREBASE_DB,
 });
 
-app.get('/.netlify/functions/server/auth/firebase', checkJwt, (req, res) => {
+app.get('/.netlify/functions/server/api/auth/firebase', checkJwt, (req, res) => {
     const uid = req.user.sub;
     firebaseAdmin
         .auth()
