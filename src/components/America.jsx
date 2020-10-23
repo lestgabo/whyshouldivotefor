@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { db } from '../utils/firebaseConfig';
 
-import AddBook from '../components/AddBook';
+import AddBook from './AddBook';
 import ApiCheck from './ApiCheck';
 
 const useStyles = makeStyles((theme) => ({
