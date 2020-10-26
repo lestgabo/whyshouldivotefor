@@ -22,7 +22,6 @@ export const rrfConfig = {
 }
 
 // init firebase
-firebase.initializeApp(firebaseConfig);
-
-export const db = firebase.firestore();
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+export const db = firebaseApp.firestore();
 export default firebase;
