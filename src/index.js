@@ -7,7 +7,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-import { authConfig } from './utils/authConfig';
+import { authConfig } from './utils/AuthConfig';
 
 const theme = createMuiTheme({
     typography: {

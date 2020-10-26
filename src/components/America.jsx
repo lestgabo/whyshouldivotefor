@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { db } from '../utils/firebaseConfig';
+import { db } from '../utils/FirebaseConfig';
 
 import AddBook from './AddBook';
 import ApiCheck from './ApiCheck';
+
+import { ActionTypes } from '../utils/Constants';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Home = () => {
+    console.log('ActionTypes.LOGIN_ERROR', ActionTypes.LOGIN_ERROR)
+
     const classes = useStyles();
     const [books, setBooks] = useState([]);
     useEffect(() => {

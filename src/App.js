@@ -4,7 +4,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import Loading from './components/Loading';
-import history from './utils/history';
+import history from './utils/History';
 import NavBar from './components/NavBar';
 import Home from './views/Home';
 
@@ -12,7 +12,7 @@ import Home from './views/Home';
 import './App.css';
 
 // fontawesome
-import initFontAwesome from './utils/initFontAwesome';
+import initFontAwesome from './utils/InitFontAwesome';
 initFontAwesome();
 
 const useStyles = makeStyles((theme) => ({

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { db } from '../utils/firebaseConfig';
+import { db } from '../utils/FirebaseConfig';
 
 const BookForm = () => {
     const [book, setBook] = useState({

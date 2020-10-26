@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
 
 import Highlight from './Highlight';
-import { db } from '../utils/firebaseConfig';
+import { db } from '../utils/FirebaseConfig';
 
 const useStyles = makeStyles((theme) => ({
     root: {
