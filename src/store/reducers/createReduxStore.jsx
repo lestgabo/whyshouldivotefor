@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import { getFirestore } from 'redux-firestore';
 import { getFirebase } from 'react-redux-firebase';
 
-import rootReducer from './RootReducer.js';
+import rootReducer from './RootReducer';
 
 const initialState = {};
 

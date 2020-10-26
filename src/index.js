@@ -7,7 +7,17 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
+// auth0
 import { authConfig } from './utils/AuthConfig';
+
+// redux 
+import { Provider } from 'react-redux';
+import CreateReduxStore from './store/reducers/CreateReduxStore';
+
+// firebase firestore
+import firebase, { rrfConfig } from './utils/FirebaseConfig';
+import { createFirestoreInstance } from 'redux-firestore';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 
 const theme = createMuiTheme({
     typography: {
@@ -29,12 +39,25 @@ const theme = createMuiTheme({
     },
 });
 
+const store = CreateReduxStore();
+const rrfProps = {
+    firebase,
+    config: rrfConfig,
+    dispatch: store.dispatch,
+    createFirestoreInstance,
+}
+
 ReactDOM.render(
     <Auth0Provider domain={authConfig.domain} clientId={authConfig.clientId} audience={authConfig.audience} redirectUri={window.location.origin}>
-        <ThemeProvider theme={theme}>
-            <App />
-        </ThemeProvider>
+        <Provider store={store}>
+            <ReactReduxFirebaseProvider { ...rrfProps }>
+                <ThemeProvider theme={theme}>
+                    <App />
+                </ThemeProvider>
+            </ReactReduxFirebaseProvider>
+        </Provider>
     </Auth0Provider>,
+  
     document.getElementById('root')
 );
 

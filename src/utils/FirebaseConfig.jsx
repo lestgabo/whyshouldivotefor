@@ -2,6 +2,7 @@ import * as firebase from 'firebase/app';
 
 // firebase product to use
 import 'firebase/firestore';
+import 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FB_API_KEY,
@@ -14,7 +15,14 @@ const firebaseConfig = {
     measurementId: process.env.REACT_APP_FB_MEASUREMENT_ID,
 };
 
+export const rrfConfig = {
+    userProfile: 'users',
+    useFirestoreForProfile: true,
+    attachAuthIsReady: true
+}
+
 // init firebase
 firebase.initializeApp(firebaseConfig);
 
 export const db = firebase.firestore();
+export default firebase;
