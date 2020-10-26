@@ -3,9 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useAuth0 } from '@auth0/auth0-react';
 import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
+import { useDispatch } from 'react-redux';
 
 import Highlight from './Highlight';
 import { db } from '../utils/FirebaseConfig';
+import { saveToken } from '../store/actions/AuthActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,6 +28,7 @@ const Home = () => {
         apiMessage: '',
         error: null,
     });
+    const dispatch = useDispatch();
 
     const { getAccessTokenSilently, loginWithPopup, getAccessTokenWithPopup } = useAuth0();
 
@@ -103,6 +106,7 @@ const Home = () => {
                 showResult: true,
                 apiMessage: responseData,
             });
+            dispatch(saveToken(responseData))
         } catch (error) {
             setState({
                 ...state,
@@ -115,7 +119,7 @@ const Home = () => {
         e.preventDefault();
         fn();
     };
-    console.log('state -> ', state);
+
     return (
         <div className={classes.root}>
             <div className="mb-5">

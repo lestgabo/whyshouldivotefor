@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { db } from '../utils/FirebaseConfig';
+import { useSelector, useDispatch } from 'react-redux';
+import Button from '@material-ui/core/Button'
 
 import AddBook from './AddBook';
 import ApiCheck from './ApiCheck';
 
-import { ActionTypes } from '../utils/Constants';
+import { signUp } from '../store/actions/AuthActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,12 +17,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Home = () => {
-    console.log('ActionTypes.LOGIN_ERROR', ActionTypes.LOGIN_ERROR)
+    const dispatch = useDispatch();
 
     const classes = useStyles();
     const [books, setBooks] = useState([]);
     useEffect(() => {
-        console.log('effect');
         const unsub = db.collection('books').onSnapshot((snapshot) => {
             const allBooks = snapshot.docs.map((doc) => ({
                 id: doc.id,
@@ -29,7 +30,6 @@ const Home = () => {
             setBooks(allBooks);
         });
         return () => {
-            console.log('cleanup');
             unsub();
         };
     }, []);
@@ -55,6 +55,9 @@ const Home = () => {
     return (
         <div className={classes.root}>
             <div>hello from America</div>
+            <Button variant="contained" color="secondary" onClick={() => dispatch(signUp())}>
+                Sign up user
+                </Button>
             <ApiCheck />
             <div className="section section-books">
                 <div className="container">

@@ -94,7 +94,7 @@ const NavBar = () => {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
-    console.log('isAuthenticated ->', isAuthenticated);
+
     return (
         <div className={classes.root}>
             <AppBar position="static">

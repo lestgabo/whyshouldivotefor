@@ -1,20 +1,21 @@
 import { ActionTypes } from '../../utils/Constants';
 
 const initState = {
-    authError: null
-}
+    authError: null,
+    customToken: null,
+};
 
 const authReducer = (state = initState, action) => {
     switch (action.type) {
         case ActionTypes.LOGIN_ERROR:
             return {
                 ...state,
-                authError: 'Login Failed'
+                authError: 'Login Failed',
             };
         case ActionTypes.LOGIN_SUCCESS:
             return {
                 ...state,
-                authError: null
+                authError: null,
             };
         case ActionTypes.LOGOUT_SUCESS:
             return {
@@ -24,16 +25,22 @@ const authReducer = (state = initState, action) => {
         case ActionTypes.SIGNUP_SUCCESS:
             return {
                 ...state,
-                authError: null
+                authError: null,
             };
         case ActionTypes.SIGNUP_ERROR:
             return {
                 ...state,
-                authError: action.err.message
+                authError: action.err.message,
+            };
+        case ActionTypes.SAVE_CUSTOM_TOKEN:
+            console.log('action.type->', action.type);
+            return {
+                ...state,
+                customToken: action.type.value,
             };
         default:
             return state;
     }
-}
+};
 
 export default authReducer;

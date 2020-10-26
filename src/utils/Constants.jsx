@@ -6,4 +6,6 @@ export const ActionTypes = keyMirror({
     LOGIN_SUCCESS: null,
     LOGIN_ERROR: null,
     LOGOUT_SUCESS: null,
+
+    SAVE_CUSTOM_TOKEN: null,
 })

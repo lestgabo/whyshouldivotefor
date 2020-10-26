@@ -11,7 +11,7 @@ export default keyMirror;
 // // example - how it works
 // const COLOURS = keyMirror({ blue: null, red: null, green: 0, purple: 'help' });
 
-// console.log(JSON.stringify(COLOURS, null, 4))
+// clog(JSON.stringify(COLOURS, null, 4))
 
 // // {
 // //     "blue": "blue",
@@ -21,7 +21,7 @@ export default keyMirror;
 // // }
 
 // const COLOURS_FROM_ARRAY = keyMirror(['green', 'purple', 'orange']);
-// console.log(JSON.stringify(COLOURS_FROM_ARRAY, null, 4));
+// clog(JSON.stringify(COLOURS_FROM_ARRAY, null, 4));
 
 // // {
 // //     "green": "green",

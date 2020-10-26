@@ -7,6 +7,4 @@ import rootReducer from './RootReducer';
 
 const initialState = {};
 
-export default () => {
-    return createStore(rootReducer, initialState, compose(applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore }))));
-};
+export default () => createStore(rootReducer, initialState, compose(applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore }))));

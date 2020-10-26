@@ -1,27 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { Auth0Provider } from '@auth0/auth0-react';
+
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-// auth0
-import { authConfig } from './utils/AuthConfig';
-
-// redux 
-import { Provider } from 'react-redux';
-import CreateReduxStore from './store/reducers/CreateReduxStore';
-
 // firebase firestore
-import firebase, { rrfConfig } from './utils/FirebaseConfig';
+import { Provider } from 'react-redux';
 import { createFirestoreInstance } from 'redux-firestore';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 
+// auth0
+import { Auth0Provider } from '@auth0/auth0-react';
+import { authConfig } from './utils/AuthConfig';
+
+// redux
+import firebase, { rrfConfig } from './utils/FirebaseConfig';
+import CreateReduxStore from './store/reducers/CreateReduxStore';
+
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
 const theme = createMuiTheme({
     typography: {
-        fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+        fontFamily: "'Roboto', 'Helvetica', 'Arial', 'sans-serif'",
         fontSize: 14,
         fontWeightLight: 300,
         fontWeightRegular: 400,
@@ -45,20 +47,24 @@ const rrfProps = {
     config: rrfConfig,
     dispatch: store.dispatch,
     createFirestoreInstance,
-}
+};
 
 ReactDOM.render(
-    <Auth0Provider domain={authConfig.domain} clientId={authConfig.clientId} audience={authConfig.audience} redirectUri={window.location.origin}>
-        <Provider store={store}>
-            <ReactReduxFirebaseProvider { ...rrfProps }>
+    <Provider store={store}>
+        <ReactReduxFirebaseProvider {...rrfProps}>
+            <Auth0Provider
+                domain={authConfig.domain}
+                clientId={authConfig.clientId}
+                audience={authConfig.audience}
+                redirectUri={window.location.origin}
+            >
                 <ThemeProvider theme={theme}>
                     <App />
                 </ThemeProvider>
-            </ReactReduxFirebaseProvider>
-        </Provider>
-    </Auth0Provider>,
-  
-    document.getElementById('root')
+            </Auth0Provider>
+        </ReactReduxFirebaseProvider>
+    </Provider>,
+    document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change
