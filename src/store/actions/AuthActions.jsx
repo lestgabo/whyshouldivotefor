@@ -3,7 +3,8 @@ import { ActionTypes } from '../../utils/Constants';
 export const signUp = (newUser) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
-        const firestore = getFirestore();
+        const firestore = getFirebase().firestore();
+        console.log('hello from signUp!');
 
         // firebase.auth().signInWithCustomToken(token).catch(function (error) {
         //     let errorCode = error.code;

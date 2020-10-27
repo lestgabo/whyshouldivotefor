@@ -11,39 +11,22 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAuth0 } from '@auth0/auth0-react';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
+    root: { flexGrow: 1 },
+    menuButton: { marginRight: theme.spacing(2) },
+    title: { flexGrow: 1 },
     userInfo: {
         display: 'flex',
         justifyContent: 'space-around',
     },
-    userPicture: {
-        borderRadius: '50%',
-    },
-    userName: {
-        '&:hover': {
-            backgroundColor: 'none',
-        },
-    },
-    iconButton: {
-        maxHeight: '64px',
-    },
+    userPicture: { borderRadius: '50%' },
+    userName: { '&:hover': { backgroundColor: 'none' } },
+    iconButton: { maxHeight: '64px' },
 }));
 
-const StyledMenu = withStyles({
-    paper: {
-        border: `1px solid #d3d4d5`,
-    },
-})((props) => (
+const StyledMenu = withStyles({ paper: { border: '1px solid #d3d4d5' } })((props) => (
     <Menu
         elevation={0}
         getContentAnchorEl={null}
@@ -63,15 +46,11 @@ const StyledMenuItem = withStyles((theme) => ({
     root: {
         '&:focus': {
             backgroundColor: theme.palette.secondary.main,
-            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                color: theme.palette.common.white,
-            },
+            '& .MuiListItemIcon-root, & .MuiListItemText-primary': { color: theme.palette.common.white },
         },
         '&:hover': {
             backgroundColor: theme.palette.secondary.main,
-            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                color: theme.palette.common.white,
-            },
+            '& .MuiListItemIcon-root, & .MuiListItemText-primary': { color: theme.palette.common.white },
         },
     },
 }))(MenuItem);
@@ -81,11 +60,7 @@ const NavBar = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-    const logoutWithRedirect = () => {
-        logout({
-            returnTo: window.location.origin,
-        });
-    };
+    const logoutWithRedirect = () => { logout({ returnTo: window.location.origin }); };
 
     const handleMenuClick = (event) => {
         setAnchorEl(event.currentTarget);

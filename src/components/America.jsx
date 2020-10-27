@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { db } from '../utils/FirebaseConfig';
-import { useSelector, useDispatch } from 'react-redux';
-import Button from '@material-ui/core/Button'
 
-import AddBook from './AddBook';
+import { useDispatch } from 'react-redux';
+import Button from '@material-ui/core/Button';
+
+import { db } from '../utils/FirebaseConfig';
 import ApiCheck from './ApiCheck';
 
 import { signUp } from '../store/actions/AuthActions';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         backgroundColor: '#FFFFFF',
         height: '90vh',
@@ -34,12 +34,11 @@ const Home = () => {
         };
     }, []);
 
-    const deleteBook = (id) => {
-        db.collection('books').doc(id).delete();
-    };
+    // const deleteBook = (id) => {
+    //     db.collection('books').doc(id).delete();
+    // };
 
     /** delete book code
-                      
          <div
             onClick={() => deleteBook(book.id)}
             className="book-delete"
@@ -49,7 +48,7 @@ const Home = () => {
         </div>
 
         * add book code
-         <AddBook /> 
+         <AddBook />
      */
 
     return (
@@ -57,7 +56,7 @@ const Home = () => {
             <div>hello from America</div>
             <Button variant="contained" color="secondary" onClick={() => dispatch(signUp())}>
                 Sign up user
-                </Button>
+            </Button>
             <ApiCheck />
             <div className="section section-books">
                 <div className="container">
