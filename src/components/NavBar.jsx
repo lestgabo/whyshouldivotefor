@@ -13,6 +13,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch } from 'react-redux';
 
 import { saveCustomToken } from '../store/actions/AuthActions';
+import { Site } from '../utils/Constants';
 
 const useStyles = makeStyles((theme) => ({
     root: { flexGrow: 1 },
@@ -83,7 +84,7 @@ const NavBar = () => {
                         <FontAwesomeIcon icon="bars" />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        Why Should I Vote For
+                        {Site.TITLE}
                     </Typography>
 
                     {/* if not logged in -> user icon  */}

@@ -3,12 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useAuth0 } from '@auth0/auth0-react';
 import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
-import { useDispatch } from 'react-redux';
 
-import { db } from '../utils/FirebaseConfig';
+// import { db } from '../utils/FirebaseConfig';
 // import { saveToken } from '../store/actions/AuthActions';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         backgroundColor: '#FFFFFF',
         height: '90vh',
@@ -27,9 +26,33 @@ const Home = () => {
         apiMessage: '',
         error: null,
     });
-    const dispatch = useDispatch();
 
     const { getAccessTokenSilently, loginWithPopup, getAccessTokenWithPopup } = useAuth0();
+
+    const callApi = async () => {
+        try {
+            const token = await getAccessTokenSilently();
+
+            const response = await fetch(`${apiOrigin}/api/external`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const responseData = await response.json();
+
+            setState({
+                ...state,
+                showResult: true,
+                apiMessage: responseData,
+            });
+        } catch (error) {
+            setState({
+                ...state,
+                error: error.error,
+            });
+        }
+    };
 
     const handleConsent = async () => {
         try {
@@ -61,31 +84,6 @@ const Home = () => {
             });
         }
         await callApi();
-    };
-
-    const callApi = async () => {
-        try {
-            const token = await getAccessTokenSilently();
-
-            const response = await fetch(`${apiOrigin}/api/external`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            const responseData = await response.json();
-
-            setState({
-                ...state,
-                showResult: true,
-                apiMessage: responseData,
-            });
-        } catch (error) {
-            setState({
-                ...state,
-                error: error.error,
-            });
-        }
     };
 
     const callApiFB = async () => {
@@ -124,8 +122,9 @@ const Home = () => {
             <div className="mb-5">
                 {state.error === 'consent_required' && (
                     <Alert severity="warning">
-                        You need to{' '}
-                        <a href="#/" class="alert-link" onClick={(e) => handle(e, handleConsent)}>
+                        You need to
+                        {' '}
+                        <a href="#/" className="alert-link" onClick={(e) => handle(e, handleConsent)}>
                             consent to get access to users api
                         </a>
                     </Alert>
@@ -133,8 +132,9 @@ const Home = () => {
 
                 {state.error === 'login_required' && (
                     <Alert severity="warning">
-                        You need to{' '}
-                        <a href="#/" class="alert-link" onClick={(e) => handle(e, handleLoginAgain)}>
+                        You need to
+                        {' '}
+                        <a href="#/" className="alert-link" onClick={(e) => handle(e, handleLoginAgain)}>
                             log in again
                         </a>
                     </Alert>
@@ -143,7 +143,7 @@ const Home = () => {
                 <h1>External API</h1>
                 <p>
                     Ping an external API by clicking the button below. This will call the external API using an access token, and the API will
-                    validate it using the API's audience value.
+                    validate it using the API&apos;s audience value.
                 </p>
 
                 <Button variant="contained" color="secondary" onClick={callApi}>

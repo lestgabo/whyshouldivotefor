@@ -8,4 +8,8 @@ export const ActionTypes = keyMirror({
     LOGOUT_SUCESS: null,
 
     SAVE_CUSTOM_TOKEN: null,
-})
+});
+
+export const Site = {
+    TITLE: 'Should Have Won It That Year',
+};
