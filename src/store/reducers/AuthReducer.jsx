@@ -33,10 +33,9 @@ const authReducer = (state = initState, action) => {
                 authError: action.err.message,
             };
         case ActionTypes.SAVE_CUSTOM_TOKEN:
-            console.log('action.type->', action.type);
             return {
                 ...state,
-                customToken: action.type.value,
+                customToken: action.data.firebaseToken,
             };
         default:
             return state;

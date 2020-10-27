@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,9 +9,10 @@ import IconButton from '@material-ui/core/IconButton';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch } from 'react-redux';
+
+import { saveCustomToken } from '../store/actions/AuthActions';
 
 const useStyles = makeStyles((theme) => ({
     root: { flexGrow: 1 },
@@ -58,8 +59,8 @@ const StyledMenuItem = withStyles((theme) => ({
 const NavBar = () => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
-    const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
-
+    const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0();
+    const dispatch = useDispatch();
     const logoutWithRedirect = () => { logout({ returnTo: window.location.origin }); };
 
     const handleMenuClick = (event) => {
@@ -69,6 +70,10 @@ const NavBar = () => {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+
+    useEffect(() => {
+        if (isAuthenticated) dispatch(saveCustomToken(getAccessTokenSilently));
+    }, [dispatch, isAuthenticated, getAccessTokenSilently]);
 
     return (
         <div className={classes.root}>

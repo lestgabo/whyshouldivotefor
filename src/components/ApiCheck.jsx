@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 import Highlight from './Highlight';
 import { db } from '../utils/FirebaseConfig';
-import { saveToken } from '../store/actions/AuthActions';
+// import { saveToken } from '../store/actions/AuthActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -106,7 +106,7 @@ const Home = () => {
                 showResult: true,
                 apiMessage: responseData,
             });
-            dispatch(saveToken(responseData))
+            // dispatch(saveToken(responseData))
         } catch (error) {
             setState({
                 ...state,

@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import { db } from '../utils/FirebaseConfig';
 import ApiCheck from './ApiCheck';
 
-import { signUp } from '../store/actions/AuthActions';
+// import { signUp } from '../store/actions/AuthActions';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -54,9 +54,9 @@ const Home = () => {
     return (
         <div className={classes.root}>
             <div>hello from America</div>
-            <Button variant="contained" color="secondary" onClick={() => dispatch(signUp())}>
+            {/* <Button variant="contained" color="secondary" onClick={() => dispatch(signUp())}>
                 Sign up user
-            </Button>
+            </Button> */}
             <ApiCheck />
             <div className="section section-books">
                 <div className="container">
