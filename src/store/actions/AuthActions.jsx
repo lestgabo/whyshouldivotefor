@@ -16,8 +16,8 @@ import { ActionTypes } from '../../utils/Constants';
 // };
 
 // eslint-disable-next-line import/prefer-default-export
-export const saveCustomToken = (payload) => {
-    return (dispatch, getState, { getFirebase }) => {
+export const saveCustomToken = (payload) => (
+    (dispatch, getState, { getFirebase }) => {
         const getAccessTokenSilently = payload;
         // first time login ?
         // login button clicked -> do Auth0 stuff
@@ -34,9 +34,7 @@ export const saveCustomToken = (payload) => {
                 const token = await getAccessTokenSilently();
 
                 const response = await fetch(`${apiOrigin}/api/auth/firebase`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
+                    headers: { Authorization: `Bearer ${token}` },
                 });
 
                 const responseData = await response.json();
@@ -47,5 +45,5 @@ export const saveCustomToken = (payload) => {
             }
         };
         callApiFB();
-    };
-};
+    }
+);
