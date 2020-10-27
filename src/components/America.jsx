@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useDispatch } from 'react-redux';
-import Button from '@material-ui/core/Button';
+import { useSelector } from 'react-redux';
 
 import { db } from '../utils/FirebaseConfig';
 import ApiCheck from './ApiCheck';
-
-// import { signUp } from '../store/actions/AuthActions';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -17,7 +14,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Home = () => {
-    const dispatch = useDispatch();
+    const customToken = useSelector((state) => state.auth.customToken);
 
     const classes = useStyles();
     const [books, setBooks] = useState([]);
@@ -33,6 +30,8 @@ const Home = () => {
             unsub();
         };
     }, []);
+
+    console.log(' customOtoekn ->', customToken);
 
     // const deleteBook = (id) => {
     //     db.collection('books').doc(id).delete();

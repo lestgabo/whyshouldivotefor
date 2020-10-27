@@ -22,7 +22,6 @@
         "firebase": "^7.24.0",
         "firebase-admin": "^9.2.0",
         "helmet": "^4.1.1",
-        "highlight.js": "^10.2.1",
         "http-proxy-middleware": "^1.0.5",
         "jwks-rsa": "^1.10.1",
         "morgan": "^1.10.0",

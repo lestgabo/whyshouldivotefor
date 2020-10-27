@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
 import { useDispatch } from 'react-redux';
 
-import Highlight from './Highlight';
 import { db } from '../utils/FirebaseConfig';
 // import { saveToken } from '../store/actions/AuthActions';
 
@@ -159,9 +158,7 @@ const Home = () => {
                 {state.showResult && (
                     <div className="result-block" data-testid="api-result">
                         <h6 className="muted">Result</h6>
-                        <Highlight>
-                            <span>{JSON.stringify(state.apiMessage, null, 2)}</span>
-                        </Highlight>
+                        <span>{JSON.stringify(state.apiMessage, null, 2)}</span>
                     </div>
                 )}
             </div>
