@@ -1,30 +1,40 @@
 import { ActionTypes } from '../../utils/Constants';
 
-// export const signUp = (newUser) => {
-//     return (dispatch, getState, { getFirebase }) => {
-//         const firebase = getFirebase();
-//         const firestore = getFirebase().firestore();
-//         console.log('hello from signUp!');
+export const signUp = (newUser) => (
+    (dispatch, getState, { getFirebase }) => {
+        // const firebase = getFirebase();
+        // const firestore = getFirebase().firestore();
+        // const token = getState.auth.customToken;
+        // console.log('hello from signUp!');
+        // console.log('token ->', token);
+    }
+);
 
-//         // firebase.auth().signInWithCustomToken(token).catch(function (error) {
-//         //     let errorCode = error.code;
-//         //     let errorMessage = error.message;
+// firebase.auth().signInWithCustomToken(token).catch(function(error){
+//     let errorCode = error.code;
+//     let errorMessage = error.message;
 
-//         //     console.log('errorCode', errorCode, '----', 'errorMessage', errorMessage)
-//         // })
-//     };
-// };
+//     console.log('errorCode', errorCode, '----', 'errorMessage', errorMessage)
+
+// })
 
 // eslint-disable-next-line import/prefer-default-export
-export const saveCustomToken = (payload) => (
+export const linkedInToFirebase = (payload) => (
     (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        const firestore = getFirebase().firestore();
+        // const token = getState();
         const getAccessTokenSilently = payload;
+
+        // console.log('hello from signUp!');
+        // console.log('token ->', token);
+
         // first time login ?
         // login button clicked -> do Auth0 stuff
         // use Auth0 token to get a firebase custom token
         // use firebase custom token to login into firebase
         // when logging into firebase, create user if it doesn't exist
-        // console.log('hello from saveCustomToken');
+
         // console.log('getAccessTokenSilently ->', getAccessTokenSilently);
         // netlify function server
         const apiOrigin = 'http://localhost:9000/.netlify/functions/server';
@@ -40,6 +50,13 @@ export const saveCustomToken = (payload) => (
                 const responseData = await response.json();
 
                 dispatch({ type: ActionTypes.SAVE_CUSTOM_TOKEN, data: responseData });
+
+                firebase.auth().signInWithCustomToken(responseData.firebaseToken).catch((error) => {
+                    let errorCode = error.code;
+                    let errorMessage = error.message;
+                    console.log('errorCode', errorCode, '----', 'errorMessage', errorMessage);
+                });
+
             } catch (error) {
                 console.log(error);
             }

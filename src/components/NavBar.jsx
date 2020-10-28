@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch } from 'react-redux';
 
-import { saveCustomToken } from '../store/actions/AuthActions';
+import { linkedInToFirebase } from '../store/actions/AuthActions';
 import { Site } from '../utils/Constants';
 
 const useStyles = makeStyles((theme) => ({
@@ -72,8 +72,9 @@ const NavBar = () => {
         setAnchorEl(null);
     };
 
+    // if isAuthenticated from linkedin -> login user into firebase
     useEffect(() => {
-        if (isAuthenticated) dispatch(saveCustomToken(getAccessTokenSilently));
+        if (isAuthenticated) dispatch(linkedInToFirebase(getAccessTokenSilently));
     }, [dispatch, isAuthenticated, getAccessTokenSilently]);
 
     return (

@@ -22,11 +22,13 @@ const authReducer = (state = initState, action) => {
                 ...state,
             };
         case ActionTypes.SIGNUP_SUCCESS:
+            // console.log('Action type ->', action.type);
             return {
                 ...state,
                 authError: null,
             };
         case ActionTypes.SIGNUP_ERROR:
+            // console.log('Action type ->', action.type);
             return {
                 ...state,
                 authError: action.err.message,
