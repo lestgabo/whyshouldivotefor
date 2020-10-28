@@ -1,22 +1,5 @@
+/* eslint-disable no-console */
 import { ActionTypes, Site } from '../../utils/Constants';
-
-export const signUp = (newUser) => (
-    (dispatch, getState, { getFirebase }) => {
-        // const firebase = getFirebase();
-        // const firestore = getFirebase().firestore();
-        // const token = getState.auth.customToken;
-        // console.log('hello from signUp!');
-        // console.log('token ->', token);
-    }
-);
-
-// firebase.auth().signInWithCustomToken(token).catch(function(error){
-//     let errorCode = error.code;
-//     let errorMessage = error.message;
-
-//     console.log('errorCode', errorCode, '----', 'errorMessage', errorMessage)
-
-// })
 
 // eslint-disable-next-line import/prefer-default-export
 export const auth0ToFirebase = (payload) => (
@@ -24,14 +7,6 @@ export const auth0ToFirebase = (payload) => (
         const firebase = getFirebase();
         const firestore = getFirebase().firestore();
         const { getAccessTokenSilently, user } = payload;
-
-        // first time login ?
-        // login button clicked -> do Auth0 stuff
-        // use Auth0 token to get a firebase custom token
-        // use firebase custom token to login into firebase
-        // when logging into firebase, create user if it doesn't exist
-
-        // netlify function server
         const apiOrigin = Site.NETLIFY_FUNCTION_SERVER;
 
         const callApiFB = async () => {
@@ -51,6 +26,7 @@ export const auth0ToFirebase = (payload) => (
                     .then(() => {
                         firebase.auth().currentUser.updateEmail(user.email);
                     })
+                    // creates user in firestore if new
                     .then(() => {
                         firestore
                             .collection('users')
