@@ -19,14 +19,12 @@ export const signUp = (newUser) => (
 // })
 
 // eslint-disable-next-line import/prefer-default-export
-export const linkedInToFirebase = (payload) => (
+export const auth0ToFirebase = (payload) => (
     (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
-        const firestore = getFirebase().firestore();
-        // const token = getState();
-        const getAccessTokenSilently = payload;
+        const { getAccessTokenSilently, user } = payload;
 
-        // console.log('hello from signUp!');
+        console.log('user ', user.email);
         // console.log('token ->', token);
 
         // first time login ?
@@ -51,12 +49,15 @@ export const linkedInToFirebase = (payload) => (
 
                 dispatch({ type: ActionTypes.SAVE_CUSTOM_TOKEN, data: responseData });
 
-                firebase.auth().signInWithCustomToken(responseData.firebaseToken).catch((error) => {
-                    let errorCode = error.code;
-                    let errorMessage = error.message;
-                    console.log('errorCode', errorCode, '----', 'errorMessage', errorMessage);
-                });
-
+                firebase.auth().signInWithCustomToken(responseData.firebaseToken)
+                    .then(() => {
+                        firebase.auth().currentUser.updateEmail(user.email);
+                    })
+                    .catch((error) => {
+                        let errorCode = error.code;
+                        let errorMessage = error.message;
+                        console.log('errorCode', errorCode, '----', 'errorMessage', errorMessage);
+                    });
             } catch (error) {
                 console.log(error);
             }
