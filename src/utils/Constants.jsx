@@ -12,4 +12,5 @@ export const ActionTypes = keyMirror({
 
 export const Site = {
     TITLE: 'Should Have Won It That Year',
+    NETLIFY_FUNCTION_SERVER: 'http://localhost:9000/.netlify/functions/server',
 };

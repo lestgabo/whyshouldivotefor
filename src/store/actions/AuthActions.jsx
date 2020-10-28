@@ -1,4 +1,4 @@
-import { ActionTypes } from '../../utils/Constants';
+import { ActionTypes, Site } from '../../utils/Constants';
 
 export const signUp = (newUser) => (
     (dispatch, getState, { getFirebase }) => {
@@ -22,10 +22,8 @@ export const signUp = (newUser) => (
 export const auth0ToFirebase = (payload) => (
     (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
+        const firestore = getFirebase().firestore();
         const { getAccessTokenSilently, user } = payload;
-
-        console.log('user ', user.email);
-        // console.log('token ->', token);
 
         // first time login ?
         // login button clicked -> do Auth0 stuff
@@ -33,9 +31,8 @@ export const auth0ToFirebase = (payload) => (
         // use firebase custom token to login into firebase
         // when logging into firebase, create user if it doesn't exist
 
-        // console.log('getAccessTokenSilently ->', getAccessTokenSilently);
         // netlify function server
-        const apiOrigin = 'http://localhost:9000/.netlify/functions/server';
+        const apiOrigin = Site.NETLIFY_FUNCTION_SERVER;
 
         const callApiFB = async () => {
             try {
@@ -49,13 +46,26 @@ export const auth0ToFirebase = (payload) => (
 
                 dispatch({ type: ActionTypes.SAVE_CUSTOM_TOKEN, data: responseData });
 
+                // login auth0 user into firebase
                 firebase.auth().signInWithCustomToken(responseData.firebaseToken)
                     .then(() => {
                         firebase.auth().currentUser.updateEmail(user.email);
                     })
+                    .then(() => {
+                        firestore
+                            .collection('users')
+                            .doc(user.sub)
+                            .set(
+                                {
+                                    email: user.email,
+                                    name: user.name,
+                                },
+                                { merge: true },
+                            );
+                    })
                     .catch((error) => {
-                        let errorCode = error.code;
-                        let errorMessage = error.message;
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
                         console.log('errorCode', errorCode, '----', 'errorMessage', errorMessage);
                     });
             } catch (error) {
