@@ -1,14 +1,14 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 
-import America from '../components/America';
+import BestPicture from '../components/BestPicture';
 
-const Home = () => (
+const TwentyNineteen = () => (
     <>
         <Container maxWidth="sm">
-            <America />
+            <BestPicture />
         </Container>
     </>
 );
 
-export default Home;
+export default TwentyNineteen;
