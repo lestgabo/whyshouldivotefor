@@ -63,6 +63,7 @@ const NavBar = () => {
     const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0();
     const dispatch = useDispatch();
     const logoutWithRedirect = () => { logout({ returnTo: window.location.origin }); };
+    const apiOrigin = Site.MOVIE_SERVER_DEV;
 
     const handleMenuClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -76,6 +77,18 @@ const NavBar = () => {
     useEffect(() => {
         if (isAuthenticated) dispatch(auth0ToFirebase({ getAccessTokenSilently, user }));
     }, [dispatch, isAuthenticated, getAccessTokenSilently, user]);
+
+    const callMovie = async () => {
+        try {
+            const response = await fetch(`${apiOrigin}`);
+            const responseData = await response.json();
+
+            console.log('response of callMovie ->', responseData);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    callMovie();
 
     return (
         <div className={classes.root}>

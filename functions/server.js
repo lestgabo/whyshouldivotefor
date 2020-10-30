@@ -7,6 +7,7 @@ const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const firebaseAdmin = require('firebase-admin');
 const bodyParser = require('body-parser');
+const imdb = require('imdb-api');
 
 const app = express();
 const router = express.Router();
@@ -22,7 +23,7 @@ if (!config.AUTH0_DOMAIN || !config.AUTH0_AUDIENCE) {
 
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(cors({ origin: appOrigin }));
+app.use(cors());
 
 const checkJwt = jwt({
     secret: jwksRsa.expressJwtSecret({
