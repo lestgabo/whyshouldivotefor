@@ -14,3 +14,8 @@ export const Site = {
     TITLE: 'Should Have Won It That Year',
     NETLIFY_FUNCTION_SERVER: 'http://localhost:9000/.netlify/functions/server',
 };
+
+export const EnvironmentVariables = {
+    omdbKey: process.env.REACT_APP_OMDB_KEY,
+    omdbURL: process.env.REACT_APP_OMDB_URL,
+};

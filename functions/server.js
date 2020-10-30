@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const serverless = require('serverless-http');
 const cors = require('cors');
@@ -8,9 +6,9 @@ const helmet = require('helmet');
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const firebaseAdmin = require('firebase-admin');
+const bodyParser = require('body-parser');
 
 const app = express();
-const bodyParser = require('body-parser');
 const router = express.Router();
 
 const config = require('./config');
