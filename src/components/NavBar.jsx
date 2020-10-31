@@ -13,6 +13,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch } from 'react-redux';
 
 import { auth0ToFirebase } from '../store/actions/AuthActions';
+import { getMovieData } from '../store/actions/MovieActions';
 import { Site } from '../utils/Constants';
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +64,6 @@ const NavBar = () => {
     const { user, isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0();
     const dispatch = useDispatch();
     const logoutWithRedirect = () => { logout({ returnTo: window.location.origin }); };
-    const apiOrigin = Site.MOVIE_SERVER_DEV;
 
     const handleMenuClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -75,20 +75,11 @@ const NavBar = () => {
 
     // if isAuthenticated from linkedin -> login user into firebase
     useEffect(() => {
-        if (isAuthenticated) dispatch(auth0ToFirebase({ getAccessTokenSilently, user }));
-    }, [dispatch, isAuthenticated, getAccessTokenSilently, user]);
-
-    const callMovie = async () => {
-        try {
-            const response = await fetch(`${apiOrigin}`);
-            const responseData = await response.json();
-
-            console.log('response of callMovie ->', responseData);
-        } catch (error) {
-            console.log(error);
+        if (isAuthenticated) {
+            dispatch(auth0ToFirebase({ getAccessTokenSilently, user }));
+            dispatch(getMovieData({ getAccessTokenSilently }));
         }
-    };
-    callMovie();
+    }, [dispatch, isAuthenticated, getAccessTokenSilently, user]);
 
     return (
         <div className={classes.root}>

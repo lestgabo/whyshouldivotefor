@@ -8,12 +8,14 @@ export const ActionTypes = keyMirror({
     LOGOUT_SUCESS: null,
 
     SAVE_CUSTOM_TOKEN: null,
+
+    GET_MOVIE_DATA: null,
 });
 
 export const Site = {
     TITLE: 'Should Have Won It That Year',
     NETLIFY_FUNCTION_SERVER: 'http://localhost:9000/.netlify/functions/server',
-    MOVIE_SERVER_DEV: 'http://localhost:9002/movie',
+    MOVIE_SERVER_DEV: 'http://localhost:9002',
 };
 
 export const EnvironmentVariables = {
