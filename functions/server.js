@@ -7,7 +7,6 @@ const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const firebaseAdmin = require('firebase-admin');
 const bodyParser = require('body-parser');
-const imdb = require('imdb-api');
 
 const app = express();
 const router = express.Router();

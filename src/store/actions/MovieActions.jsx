@@ -9,7 +9,7 @@ export const getMovieData = (payload) => (
         const { getAccessTokenSilently } = payload;
         const apiOrigin = Site.MOVIE_SERVER_DEV;
 
-        const movieName = 'let the right one in';
+        const movieToGet = 'Parasite';
 
         const callImdbApi = async () => {
             try {
@@ -17,17 +17,17 @@ export const getMovieData = (payload) => (
 
                 const response = await fetch(`${apiOrigin}/movie`, {
                     method: 'post',
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
                     body: JSON.stringify({
-                        movie: movieName,
-                    })
+                        movie: movieToGet,
+                    }),
                 });
                 const responseData = await response.json();
 
-                console.log('response from callImdbApi -> ', responseData);
+                console.log('response from callImdbApi -> ', responseData.response);
             } catch (error) {
                 console.log(error);
-            };
+            }
         };
         callImdbApi();
     }
