@@ -9,7 +9,7 @@ export const getMovieData = (payload) => (
         const { getAccessTokenSilently } = payload;
         const apiOrigin = Site.MOVIE_SERVER_DEV;
 
-        const movieToGet = 'Parasite';
+        const movieToGet = 'Once Upon a Time... In Hollywood';
 
         const callImdbApi = async () => {
             try {
@@ -25,6 +25,21 @@ export const getMovieData = (payload) => (
                 const responseData = await response.json();
 
                 console.log('response from callImdbApi -> ', responseData.response);
+
+                // firestore.collection('movies').where('_yearData', '==', '2019')
+                // just manually adding movies into firestore
+                // firestore
+                //     .collection('movies')
+                //     .add({
+                //         property: firestore.doc(``)
+                //     });
+                // .then(() => {
+                //     dispatch({ type: 'UPDATE_USER_CHAMP_ITEMS_SUCCESS', champsWithItemsRef });
+                // })
+                // .catch((err) => {
+                //     dispatch({ type: 'UPDATE_CHAMP_ITEMS_ERROR' }, err);
+                // });
+
             } catch (error) {
                 console.log(error);
             }
