@@ -13,9 +13,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch } from 'react-redux';
 
 import { auth0ToFirebase } from '../store/actions/AuthActions';
-import { getMovieData } from '../store/actions/MovieActions';
 import { Site } from '../utils/Constants';
-import { db } from '../utils/FirebaseConfig';
 
 const useStyles = makeStyles((theme) => ({
     root: { flexGrow: 1 },
@@ -78,25 +76,8 @@ const NavBar = () => {
     useEffect(() => {
         if (isAuthenticated) {
             dispatch(auth0ToFirebase({ getAccessTokenSilently, user }));
-            // dispatch(getMovieData({ getAccessTokenSilently }));
-            // query data
         }
     }, [dispatch, isAuthenticated, getAccessTokenSilently, user]);
-
-    console.log('HELLO FROM NAVBAR');
-    const getMovies = async () => {
-        const citiesRef = db.collection('movies');
-        const snapshot = await citiesRef.where('_yearData', '==', '2019').get();
-        if (snapshot.empty) {
-            console.log('No matching documents.');
-            return;
-        }
-
-        snapshot.forEach(doc => {
-            console.log(doc.id, '=>', doc.data());
-        });
-    };
-    getMovies();
 
     return (
         <div className={classes.root}>
