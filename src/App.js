@@ -7,12 +7,14 @@ import Loading from './components/Loading';
 import history from './utils/History';
 import NavBar from './components/NavBar';
 import Home from './views/Home';
+import InitMovies from './init/GetMovies';
 
 // styles
 import './App.css';
 
 // fontawesome
 import initFontAwesome from './utils/InitFontAwesome';
+
 initFontAwesome();
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 'calc(100vh - 64px)',
+        height: 'calc(100vh)',
         width: '100%',
         padding: '0px',
         margin: '0px',
@@ -43,14 +45,17 @@ const App = () => {
     }
 
     return (
-        <Router history={history}>
-            <NavBar />
-            <div id="app" className={classes.root}>
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                </Switch>
-            </div>
-        </Router>
+        <>
+            <InitMovies />
+            <Router history={history}>
+                <div id="app" className={classes.root}>
+                    <NavBar />
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                    </Switch>
+                </div>
+            </Router>
+        </>
     );
 };
 

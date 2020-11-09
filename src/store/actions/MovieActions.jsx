@@ -32,3 +32,13 @@ export const getMovieData = (payload) => (
         callImdbApi();
     }
 );
+
+export const getMoviesData = (payload) => (
+    (dispatch) => {
+        const { movies } = payload;
+        // convert object into array -> array of movies each with index 0 = title and index 1 = movie data
+        const moviesArray = Object.entries(movies);
+        // console.log(ActionTypes.GET_MOVIES_DATA)
+        dispatch({ type: ActionTypes.GET_MOVIES_DATA, movies: moviesArray });
+    }
+);

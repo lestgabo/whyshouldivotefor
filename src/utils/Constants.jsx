@@ -9,11 +9,11 @@ export const ActionTypes = keyMirror({
 
     SAVE_CUSTOM_TOKEN: null,
 
-    GET_MOVIE_DATA: null,
+    GET_MOVIES_DATA: null,
 });
 
 export const Site = {
-    TITLE: 'Should Have Won It That Year',
+    TITLE: "Should've Won That Year",
     NETLIFY_FUNCTION_SERVER: 'http://localhost:9000/.netlify/functions/server',
     MOVIE_SERVER_DEV: 'http://localhost:9002',
 };

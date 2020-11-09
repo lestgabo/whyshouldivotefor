@@ -16,7 +16,10 @@ import { auth0ToFirebase } from '../store/actions/AuthActions';
 import { Site } from '../utils/Constants';
 
 const useStyles = makeStyles((theme) => ({
-    root: { flexGrow: 1 },
+    root: {
+        flexGrow: 1,
+        width: '100%',
+    },
     menuButton: { marginRight: theme.spacing(2) },
     title: { flexGrow: 1 },
     userInfo: {

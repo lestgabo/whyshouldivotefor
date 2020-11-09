@@ -1,15 +1,15 @@
 import { ActionTypes } from '../../utils/Constants';
 
 const initState = {
-    movie: {},
+    moviesAll: [],
 };
 
 const movieReducer = (state = initState, action) => {
     switch (action.type) {
-        case ActionTypes.GET_MOVIE_DATA:
+        case ActionTypes.GET_MOVIES_DATA:
             return {
                 ...state,
-                movie: action.data.movie,
+                moviesAll: action.movies,
             };
         default:
             return state;

@@ -5,9 +5,7 @@ import BestPicture from '../components/BestPicture';
 
 const TwentyNineteen = () => (
     <>
-        <Container maxWidth="sm">
-            <BestPicture />
-        </Container>
+        <BestPicture />
     </>
 );
 
