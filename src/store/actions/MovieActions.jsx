@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 import { ActionTypes, Site } from '../../utils/Constants';
 
-// eslint-disable-next-line import/prefer-default-export
-export const getMovieData = (payload) => (
+export const getMovieDataFromCustomApi = (payload) => (
     (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
         const firestore = getFirebase().firestore();
@@ -33,12 +32,20 @@ export const getMovieData = (payload) => (
     }
 );
 
-export const getMoviesData = (payload) => (
+export const getMoviesDataAll = (payload) => (
     (dispatch) => {
         const { movies } = payload;
-        // convert object into array -> array of movies each with index 0 = title and index 1 = movie data
+        // convert object into array -> array of movies each with index 0 = title and index 1 = object data of movie
         const moviesArray = Object.entries(movies);
-        // console.log(ActionTypes.GET_MOVIES_DATA)
         dispatch({ type: ActionTypes.GET_MOVIES_DATA, movies: moviesArray });
+    }
+);
+
+export const getMoviesDataFromCategoryYear = (payload) => (
+    (dispatch) => {
+        const { category, year, movies } = payload;
+        // convert object into array -> array of movies each with index 0 = title and index 1 = object data of movie
+        const moviesArray = Object.entries(movies);
+        dispatch({ type: ActionTypes.GET_MOVIES_BEST_PICTURE, category, year, movies: moviesArray });
     }
 );

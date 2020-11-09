@@ -1,5 +1,6 @@
 import keyMirror from './KeyMirror';
 
+// keyMirror just copies the the key into the value
 export const ActionTypes = keyMirror({
     SIGNUP_SUCCESS: null,
     SIGNUP_ERROR: null,
@@ -10,6 +11,7 @@ export const ActionTypes = keyMirror({
     SAVE_CUSTOM_TOKEN: null,
 
     GET_MOVIES_DATA: null,
+    GET_MOVIES_BEST_PICTURE: null,
 });
 
 export const Site = {

@@ -7,7 +7,7 @@ import Loading from './components/Loading';
 import history from './utils/History';
 import NavBar from './components/NavBar';
 import Home from './views/Home';
-import InitMovies from './init/GetMovies';
+import { InitBestPicture } from './init/GetMovies';
 
 // styles
 import './App.css';
@@ -46,7 +46,7 @@ const App = () => {
 
     return (
         <>
-            <InitMovies />
+            <InitBestPicture />
             <Router history={history}>
                 <div id="app" className={classes.root}>
                     <NavBar />

@@ -11,18 +11,20 @@ const useStyles = makeStyles(() => ({
 
 const BestPicture = () => {
     const classes = useStyles();
-    const moviesAll = useSelector((state) => state.movies.moviesAll);
-    console.log('moviesAll: ',moviesAll)
+    const moviesBestPicture = useSelector((state) => state.movies.moviesBestPicture);
+
     return (
         <div className={classes.root}>
             <div>hello from Best picture</div>
             <p>
-                {moviesAll && moviesAll.map((movie) => (
-                    <>
-                        <p>{movie[0]}</p>
-                        {/* <p>{movieData.plot}</p> */}
-                    </>
-                ))}
+                {
+                    moviesBestPicture && moviesBestPicture.map((movie) => (
+                        <>
+                            <p>{movie[0]}</p>
+                            {/* <p>{movieData.plot}</p> */}
+                        </>
+                    ))
+                }
             </p>
         </div>
     );

@@ -1,16 +1,16 @@
 /**
- * add into a collections
+ ** add into a collections
 
-firestore
-.collection('movies')
-.add({
-    property: firestore.doc(``)
-});
+    firestore
+        .collection('movies')
+        .add({
+            property: firestore.doc(``)
+        });
 
 */
 
 /**
- * query for collections with options
+ ** query for collections with options
 
      const getMovies = async () => {
         const citiesRef = db.collection('movies');
@@ -29,7 +29,7 @@ firestore
  */
 
 /**
- * query for collections with options AND add each data object into another collection
+ ** query for collections with options AND add each data object into another collection
 
     const getMovies = async () => {
         const citiesRef = db.collection('movies');
@@ -53,3 +53,39 @@ firestore
     getMovies();
 
  */
+
+/**
+  ** get movie data from imdb-api using own node server
+
+    export const getMovieDataFromCustomApi = (payload) => (
+        (dispatch, getState, { getFirebase }) => {
+            const firebase = getFirebase();
+            const firestore = getFirebase().firestore();
+            const { getAccessTokenSilently } = payload;
+            const apiOrigin = Site.MOVIE_SERVER_DEV;
+
+            const movieToGet = 'Once Upon a Time... In Hollywood';
+
+            const callImdbApi = async () => {
+                try {
+                    const token = await getAccessTokenSilently();
+
+                    const response = await fetch(`${apiOrigin}/movie`, {
+                        method: 'post',
+                        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+                        body: JSON.stringify({
+                            movie: movieToGet,
+                        }),
+                    });
+                    const responseData = await response.json();
+
+                    console.log('response from callImdbApi -> ', responseData.response);
+                } catch (error) {
+                    console.log(error);
+                }
+            };
+            callImdbApi();
+        }
+    );
+
+*/
