@@ -5,7 +5,7 @@ import TwentyNineteen from './TwentyNineteen';
 
 const Home = () => (
     <>
-        <Container maxWidth="sm">
+        <Container maxWidth={false}>
             <TwentyNineteen />
         </Container>
     </>
