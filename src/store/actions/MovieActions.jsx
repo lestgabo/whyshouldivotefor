@@ -2,9 +2,7 @@
 import { ActionTypes, Site } from '../../utils/Constants';
 
 export const getMovieDataFromCustomApi = (payload) => (
-    (dispatch, getState, { getFirebase }) => {
-        const firebase = getFirebase();
-        const firestore = getFirebase().firestore();
+    () => {
         const { getAccessTokenSilently } = payload;
         const apiOrigin = Site.MOVIE_SERVER_DEV;
 

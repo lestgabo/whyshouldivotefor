@@ -40,16 +40,13 @@ export const InitBestPicture = () => {
             }
         };
         fetchData();
-    }, [dispatch]);
+    }, []);
 
-    if (data) {
-        dispatch(getMoviesDataFromCategoryYear({ category, year, movies: data }));
-        return null;
-    }
+    useEffect(() => {
+        if (data) dispatch(getMoviesDataFromCategoryYear({ category, year, movies: data }));
+    }, [data, dispatch]);
 
-    if (!data) {
-        return <Loading />;
-    }
+    if (!data) return <Loading />;
 
     return null;
 };
