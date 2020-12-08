@@ -18,15 +18,18 @@ const BestPicture = () => {
     const moviesBestPicture = useSelector((state) => state.movies.moviesBestPicture);
 
     return (
-        <Grid container className={classes.root} spacing={3} direction="row" justify="center" alignItems="space-evenly">
+        <Grid container className={classes.root} spacing={3} direction="row" justify="space-evenly" alignItems="center">
             {
-                moviesBestPicture && moviesBestPicture.map((movie) => (
-                    <>
-                        <Grid item xs={4}>
-                            <MovieCard movie={movie} />
-                        </Grid>
-                    </>
-                ))
+                moviesBestPicture && moviesBestPicture.map((movie) => {
+                    const movieTitle = movie[0];
+                    return (
+                        <div key={movieTitle}>
+                            <Grid item xs={4}>
+                                <MovieCard movie={movie} />
+                            </Grid>
+                        </div>
+                    );
+                })
             }
         </Grid>
     );
